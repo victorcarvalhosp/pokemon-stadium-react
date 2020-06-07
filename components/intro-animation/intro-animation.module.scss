@@ -8,3 +8,51 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.scene{
+  width: 100%;
+  height: 100%;
+}
+
+//scizorScene
+.scene01{
+  background-image: linear-gradient(90deg, #000000 33%, #de1b42 33%, #de1b42 66%, #000000 66%, #000000 99%, #de1b42 99%, #000 99%);
+  background-size: 100%;
+}
+
+//donphanScene
+.scene02{
+  background-color: brown;
+}
+
+//bellossonScene
+.scene03{
+  background-color: green;
+  background: radial-gradient(#fff, #000);
+  background-repeat: no-repeat;
+}
+
+//skarmoryScene
+.scene04{
+  background-color: grey;
+}
+
+//umbreonScene
+.scene05{
+  background-color: purple;
+}
+
+//pichuScene
+.scene06{
+  background-color: yellow;
+}
+
+//lugiaScene
+.scene07{
+  background-color: blue;
+}
+
+//hoohScene
+.scene08{
+  background-color: orange;
+}

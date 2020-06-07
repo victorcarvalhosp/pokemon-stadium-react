@@ -1,0 +1,74 @@
+.position{
+  text-align: center;
+  margin: 45px auto;
+  zoom: 3;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.center{
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.scene {
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  background: url(/images/fog-scene05.png) repeat #300A1A;
+  background-position: 0 121px;
+  -webkit-animation: loader 10s steps(100) infinite;
+  -moz-animation: loader 10s steps(100) infinite;
+  -ms-animation: loader 10s steps(100) infinite;
+  -o-animation: loader 10s steps(100) infinite;
+  animation: loader 10s steps(100) infinite;
+}
+
+@keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 0 -1600px;
+  }
+}
+.borderLeft{
+  background-color: #000;
+  z-index: 999;
+  height: 500px;
+  width: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: openClose 3s ease forwards;
+}
+
+@keyframes openClose {
+0% {
+    width: 50%;
+  }
+  20% {
+    width: 33%;
+  }
+  80% {
+    width: 33%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+
+.borderRight{
+  background-color: #000;
+  z-index: 999;
+  height: 500px;
+  width: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  animation: openClose 3s ease forwards;
+
+}

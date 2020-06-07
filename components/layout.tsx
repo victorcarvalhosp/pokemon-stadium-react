@@ -2,12 +2,9 @@ import Head from 'next/head'
 import styles from './layout.module.scss'
 import {useEffect, useState} from "react";
 import Screen from "./screen/screen";
-import useAudio from "../hooks/useAudio";
 import {useGlobal} from "../store/Global/GlobalContext";
-import {GlobalActionType} from "../store/Global/GlobalActions";
-import {turnOn, turnOff} from "../store/Global/GlobalActions";
+import {turnOff, turnOn} from "../store/Global/GlobalActions";
 
-const name = '[Your Name]'
 export const siteTitle = 'Pokémon Stadiumjs'
 
 export default function Layout({
