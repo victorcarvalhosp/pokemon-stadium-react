@@ -6,7 +6,6 @@ import IntroAnimation from "../components/intro-animation/intro-animation";
 import {useGlobal} from "../store/Global/GlobalContext";
 
 
-
 const initialState = {count: 0};
 
 function reducer(state, action) {
@@ -24,8 +23,6 @@ export default function Index() {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <Layout home>
-            <IntroAnimation />
-        </Layout>
+        <IntroAnimation/>
     )
 }

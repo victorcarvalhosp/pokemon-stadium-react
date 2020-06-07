@@ -3,17 +3,17 @@ import {GlobalState} from "./GlobalModels";
 import {GlobalAction, GlobalActionType} from "./GlobalActions";
 
 export const globalInitialState: GlobalState = {
-    turnedOn: false
+    turnedOn: false,
+    showContent: false
 };
 
 export const globalReducer: Reducer<GlobalState, GlobalAction> = (state = globalInitialState, action) => {
     switch (action.type) {
         case GlobalActionType.TurnOn:
-            console.log('TURN ON REDUCER');
-            return {...globalInitialState, ...action.payload};
         case GlobalActionType.TurnOff:
-            return {...globalInitialState, ...action.payload};
-        default:
+        case GlobalActionType.ShowContent:
             return {...state, ...action.payload};
+        default:
+            return {...globalInitialState, ...action.payload};
     }
 };

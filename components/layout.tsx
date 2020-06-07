@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import styles from './layout.module.scss'
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Screen from "./screen/screen";
 import {useGlobal} from "../store/Global/GlobalContext";
-import {turnOff, turnOn} from "../store/Global/GlobalActions";
+import {toggleShowContent, turnOff, turnOn} from "../store/Global/GlobalActions";
 
 export const siteTitle = 'Pokémon Stadiumjs'
 
@@ -14,9 +14,6 @@ export default function Layout({
     children: React.ReactNode
     home?: boolean
 }) {
-
-    const [showContent, setShowContent] = useState(false);
-
     const globalState = useGlobal();
 
     const toggleMonitor = () => {
@@ -26,7 +23,7 @@ export default function Layout({
             globalState?.dispatch(turnOn());
         }
         setTimeout(() => {
-            setShowContent(!globalState?.state.turnedOn);
+            globalState?.dispatch(toggleShowContent(true));
         }, 2000);
     }
 
@@ -60,7 +57,7 @@ export default function Layout({
                            className={`${styles.switchLabel} ${globalState?.state.turnedOn ? styles.switchLabelOn : ''}`}>Turn {globalState?.state.turnedOn ? 'off' : 'on'}</label>
                 </div>
                 {globalState?.state.turnedOn}
-                <Screen on={globalState?.state.turnedOn} showContent={showContent} children={children}/>
+                <Screen on={globalState?.state.turnedOn} showContent={globalState?.state.showContent} children={children}/>
             </div>
         </div>
 

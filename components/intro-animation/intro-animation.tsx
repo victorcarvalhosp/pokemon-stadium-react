@@ -74,8 +74,8 @@ export default function IntroAnimation() {
                 return {scene: 7};
             case ActionType.Scene08:
                 setTimeout(() => {
-                    Router.push('/start');
-                }, 4000);
+                    Router.push('/title');
+                }, 4500);
                 return {scene: 8};
             default:
                 throw new Error();
@@ -96,7 +96,9 @@ export default function IntroAnimation() {
 
     useEffect(() => {
         if (!globalState.state.turnedOn) {
-            console.log('STOP AUDIO');
+            stopAudio();
+        }
+        return () => {
             stopAudio();
         }
     }, [globalState.state.turnedOn]);
