@@ -1,6 +1,11 @@
 .position{
   text-align: center;
-  margin: 168px auto;
+  margin: 48px auto;
+  zoom: 3;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .center{

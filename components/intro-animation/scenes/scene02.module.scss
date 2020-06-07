@@ -1,8 +1,13 @@
 .position {
   text-align: center;
-  margin-top: 280px;
-  margin-left: -258px;
+  margin-top: 160px;
+  margin-left: -129px;
   transform: scaleX(-1);
+  zoom: 2;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 //donphanScene

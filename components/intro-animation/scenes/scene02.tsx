@@ -6,7 +6,7 @@ export default function Scene02() {
                 <div className={styles.borderTop}></div>
                 <div className={styles.borderBottom}></div>
                 <div className={styles.center}><img className={styles.position}
-                                                    src="/images/donphan.webp"/>
+                                                    src="/images/donphan.gif"/>
                 </div>
             </div>)
 }
