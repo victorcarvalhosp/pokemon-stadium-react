@@ -1,10 +1,9 @@
-import Head from 'next/head'
-import Layout from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
 import {useReducer} from "react";
-import IntroAnimation from "../components/intro-animation/intro-animation";
-import {useGlobal} from "../store/Global/GlobalContext";
+import dynamic from "next/dynamic";
 
+const IntroAnimation = dynamic(
+    () => import('../components/intro-animation/intro-animation'),
+    {ssr: false})
 
 const initialState = {count: 0};
 

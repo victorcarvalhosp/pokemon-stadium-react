@@ -1,6 +1,5 @@
 import styles from './intro-animation.module.scss'
 import {useEffect, useReducer} from "react";
-import useAudio from "../../hooks/useAudio";
 import {useGlobal} from "../../store/Global/GlobalContext";
 import Scene01 from "./scenes/scene01";
 import Scene02 from "./scenes/scene02";
@@ -11,6 +10,8 @@ import Scene06 from "./scenes/scene06";
 import Scene07 from "./scenes/scene07";
 import Scene08 from "./scenes/scene08";
 import Router from 'next/router'
+import {setActualScreen} from "../../store/Global/GlobalActions";
+import {GameScreen} from "../../store/Global/GlobalModels";
 
 const initialState = {scene: 0};
 
@@ -83,25 +84,15 @@ export default function IntroAnimation() {
     }
 
 
-    const [, playAudio, stopAudio] = useAudio("/audio/intro.mp3");
     const globalState = useGlobal();
 
     useEffect(() => {
-        playAudio();
+        globalState.dispatch(setActualScreen(GameScreen.Intro));
         dispatch({type: ActionType.Scene00});
         return () => {
-            stopAudio();
         }
     }, []);
 
-    useEffect(() => {
-        if (!globalState.state.turnedOn) {
-            stopAudio();
-        }
-        return () => {
-            stopAudio();
-        }
-    }, [globalState.state.turnedOn]);
 
     return <>
         {state.scene === 0 && (

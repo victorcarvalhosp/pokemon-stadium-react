@@ -1,10 +1,11 @@
 import {Action} from "../Action";
-import {GlobalState} from "./GlobalModels";
+import {GameScreen, GlobalState} from "./GlobalModels";
 
 export enum GlobalActionType {
     TurnOn = 'TurnOn',
     TurnOff = 'TurnOff',
     ShowContent = 'ShowContent',
+    SetScreen = 'SetScreen',
 }
 
 export type GlobalAction = Action<GlobalActionType, GlobalState>;
@@ -28,5 +29,12 @@ export const toggleShowContent = (showContent: boolean): GlobalAction => {
     return {
         type: GlobalActionType.TurnOff,
         payload: {showContent: showContent},
+    }
+};
+
+export const setActualScreen = (screen: GameScreen): GlobalAction => {
+    return {
+        type: GlobalActionType.SetScreen,
+        payload: {actualScreen: screen},
     }
 };

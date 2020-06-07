@@ -1,10 +1,11 @@
 import {Reducer} from "react";
-import {GlobalState} from "./GlobalModels";
+import {GameScreen, GlobalState} from "./GlobalModels";
 import {GlobalAction, GlobalActionType} from "./GlobalActions";
 
 export const globalInitialState: GlobalState = {
     turnedOn: false,
-    showContent: false
+    showContent: false,
+    actualScreen: GameScreen.None
 };
 
 export const globalReducer: Reducer<GlobalState, GlobalAction> = (state = globalInitialState, action) => {
@@ -12,6 +13,7 @@ export const globalReducer: Reducer<GlobalState, GlobalAction> = (state = global
         case GlobalActionType.TurnOn:
         case GlobalActionType.TurnOff:
         case GlobalActionType.ShowContent:
+        case GlobalActionType.SetScreen:
             return {...state, ...action.payload};
         default:
             return {...globalInitialState, ...action.payload};
