@@ -4,7 +4,7 @@ import {GameScreen} from "../../store/Global/GlobalModels";
 import {useGlobal} from "../../store/Global/GlobalContext";
 import dynamic from "next/dynamic";
 const CursorMenu = dynamic(
-    () => import("./menu-cursor/cursor-menu"),
+    () => import("./cursor-menu/cursor-menu"),
     {ssr: false}
 )
 

@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 
 export default function useAudio(url: string) {
-    console.log(url);
     const [audio] = useState(new Audio(url));
     const [playing, setPlaying] = useState(false);
 
@@ -10,7 +9,6 @@ export default function useAudio(url: string) {
     }
 
     const playAudio = async () => {
-        console.log('PLAY AUDIO');
         setPlaying(true);
     }
 

@@ -2,10 +2,13 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  display: none;
+  display: block;
   z-index: 99999;
   top: 50px; left: 50px;
   cursor: none;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
 }
 
 .floatingAround{

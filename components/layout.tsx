@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import Screen from "./screen/screen";
 import {useGlobal} from "../store/Global/GlobalContext";
 import {toggleShowContent, turnOff, turnOn} from "../store/Global/GlobalActions";
+import {useCursorMenu} from "./custom-cursor/cursor-menu/CursorMenuContext";
 
 export const siteTitle = 'Pokémon Stadiumjs'
 
