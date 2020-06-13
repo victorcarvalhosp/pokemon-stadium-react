@@ -25,6 +25,7 @@ export default function MainMenu() {
     return (
         <>
             <div className={style.page}>
+                <div id="stadium" className={style.castle}></div>
 
             </div>
         </>)

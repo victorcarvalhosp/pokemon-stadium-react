@@ -6,3 +6,17 @@
   cursor: none;
 }
 
+.castle{
+  position: absolute;
+  top: 20px;
+  background-color: red;
+  width: 150px;
+  height: 150px;
+  &:hover {
+      background-color: yellow;
+    ~ #cursor{
+      zoom: 2;
+    }
+  }
+}
+
