@@ -7,17 +7,29 @@ import {useGlobal} from "../../store/Global/GlobalContext";
 export default function GameAudio() {
 
     const globalState = useGlobal();
-    const [, introScreenPlayAudio, introScreenStopAudio] = useAudio("/audio/intro.mp3");
-    const [, titleScreenPlayAudio, titleScreenStopAudio] = useAudio("/audio/title-screen.mp3");
+    const [, introPlayAudio, introStopAudio] = useAudio("/audio/intro.mp3");
+    const [, titlePlayAudio, titleStopAudio] = useAudio("/audio/title-screen.mp3");
+    const [, mainMenuPlayAudio, mainMenuStopAudio] = useAudio("/audio/main-menu.mp3");
+
+
+    function stopAllSounds() {
+        titleStopAudio();
+        introStopAudio();
+        mainMenuStopAudio()
+    }
 
     useEffect(() => {
         if (!globalState.state.turnedOn) {
-            titleScreenStopAudio();
-            introScreenStopAudio();
+            stopAllSounds();
         } else if (globalState.state.actualScreen === GameScreen.Intro) {
-            introScreenPlayAudio();
+            stopAllSounds();
+            introPlayAudio();
         } else if (globalState.state.actualScreen === GameScreen.Title) {
-            titleScreenPlayAudio();
+            stopAllSounds();
+            titlePlayAudio();
+        } else if (globalState.state.actualScreen === GameScreen.MainMenu) {
+            stopAllSounds();
+            mainMenuPlayAudio();
         }
         return () => {
             // titleScreenStopAudio();

@@ -53,4 +53,10 @@ html, body {
   }
 }
 
-
+.cursor{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  z-index: 99999;
+}

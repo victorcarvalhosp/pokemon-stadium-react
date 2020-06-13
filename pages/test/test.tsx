@@ -8,12 +8,15 @@ import Scene06 from "../../components/intro-animation/scenes/scene06";
 import Scene07 from "../../components/intro-animation/scenes/scene07";
 import Scene08 from "../../components/intro-animation/scenes/scene08";
 import Router from "next/router";
+import MenuCursor from "../../components/custom-cursor/menu-cursor/floating-around";
 
 export default function Test() {
     const redirect = () => {
         Router.push('/title');
     }
     return (
-            <button onClick={() => redirect()} >Redirect here </button>
-        )
+        <>
+            <button onClick={() => redirect()}>Redirect here</button>
+        </>
+    )
 }
