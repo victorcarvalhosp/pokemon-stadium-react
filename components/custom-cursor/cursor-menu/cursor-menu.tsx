@@ -33,23 +33,27 @@ export default function CursorMenu() {
 
 
     function magnemitesFloatingAroundAnimation() {
-        const magnemite1TopPosition = cursor.current.offsetTop + (cursorMenuState.state.distance * Math.sin(angle * Math.PI / 180.0)) - 20;
-        const magnemite1LeftPosition = cursor.current.offsetLeft + (cursorMenuState.state.distance * Math.cos(angle * Math.PI / 180.0)) - 20;
+        let screenSizeFactor = 1;
+        if(screen.width < 640){
+            screenSizeFactor = 2;
+        }
+        const magnemite1TopPosition = cursor.current.offsetTop + ((cursorMenuState.state.distance * Math.sin(angle * Math.PI / 180.0))/screenSizeFactor)  - 20;
+        const magnemite1LeftPosition = cursor.current.offsetLeft + ((cursorMenuState.state.distance * Math.cos(angle * Math.PI / 180.0))/screenSizeFactor)  - 20;
 
-        magnemite1.current.style.top = magnemite1TopPosition + "px";
-        magnemite1.current.style.left = magnemite1LeftPosition + "px";
+        magnemite1.current.style.top = (magnemite1TopPosition*screenSizeFactor) + "px";
+        magnemite1.current.style.left = (magnemite1LeftPosition*screenSizeFactor) + "px";
 
-        const magnemite2TopPosition = cursor.current.offsetTop + (cursorMenuState.state.distance * Math.sin((angle + 120) * Math.PI / 180.0)) - 20;
-        const magnemite2LeftPosition = cursor.current.offsetLeft + (cursorMenuState.state.distance * Math.cos((angle + 120) * Math.PI / 180.0)) - 20;
+        const magnemite2TopPosition = cursor.current.offsetTop + ((cursorMenuState.state.distance * Math.sin((angle + 120) * Math.PI / 180.0))/screenSizeFactor)  - 20;
+        const magnemite2LeftPosition = cursor.current.offsetLeft + ((cursorMenuState.state.distance * Math.cos((angle + 120) * Math.PI / 180.0))/screenSizeFactor)  - 20;
 
-        magnemite2.current.style.top = magnemite2TopPosition + "px";
-        magnemite2.current.style.left = magnemite2LeftPosition + "px";
+        magnemite2.current.style.top = (magnemite2TopPosition*screenSizeFactor) + "px";
+        magnemite2.current.style.left = (magnemite2LeftPosition*screenSizeFactor) + "px";
 
-        const magnemite3TopPosition = cursor.current.offsetTop + (cursorMenuState.state.distance * Math.sin((angle + 240) * Math.PI / 180.0)) - 20;
-        const magnemite3LeftPosition = cursor.current.offsetLeft + (cursorMenuState.state.distance * Math.cos((angle + 240) * Math.PI / 180.0)) - 20;
+        const magnemite3TopPosition = cursor.current.offsetTop + ((cursorMenuState.state.distance * Math.sin((angle + 240) * Math.PI / 180.0))/screenSizeFactor) - 20;
+        const magnemite3LeftPosition = cursor.current.offsetLeft + ((cursorMenuState.state.distance * Math.cos((angle + 240) * Math.PI / 180.0))/screenSizeFactor)- 20;
 
-        magnemite3.current.style.top = magnemite3TopPosition + "px";
-        magnemite3.current.style.left = magnemite3LeftPosition + "px";
+        magnemite3.current.style.top = (magnemite3TopPosition*screenSizeFactor) + "px";
+        magnemite3.current.style.left = (magnemite3LeftPosition*screenSizeFactor) + "px";
 
         angle -= (speed * (rate / 1000)) % 360;
     }
