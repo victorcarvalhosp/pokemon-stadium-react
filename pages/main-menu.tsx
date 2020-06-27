@@ -6,6 +6,7 @@ import {GameScreen} from "../store/Global/GlobalModels";
 import {useCursorMenu} from "../components/custom-cursor/cursor-menu/CursorMenuContext";
 import {defaultDistance, increaseDistance} from "../components/custom-cursor/cursor-menu/CursorMenuActions";
 import Router from "next/router";
+import MenuTextContainer from "../components/menu-text-container/menu-text-container";
 
 
 enum ActionType {
@@ -42,7 +43,8 @@ interface IOptionMenu {
     left: number,
     width: number,
     height: number,
-    cursorDistance: number
+    cursorDistance: number,
+    goTo: string;
 }
 
 const options: Map<MainMenuOption, IOptionMenu> = new Map(); // or var map = {};
@@ -55,7 +57,8 @@ options[MainMenuOption.STADIUM] = {
     left: 223,
     width: 178,
     height: 108,
-    cursorDistance: 70
+    cursorDistance: 70,
+    goTo: '/stadium/menu'
 };
 options[MainMenuOption.GB_TOWER] = {
     actionType: ActionType.SelectGbTower,
@@ -142,8 +145,6 @@ interface IMainMenuState {
 }
 
 const initialState: IMainMenuState = {selected: MainMenuOption.NONE, title: "", description: ""};
-// const initialState = {selected: 0};
-
 
 export default function MainMenu() {
     const globalState = useGlobal();
@@ -233,16 +234,10 @@ export default function MainMenu() {
         <>
             <div className={style.page}>
                 {Object.keys(options).map(key => (
-                    <div id={key} key={key} onMouseOver={() => onMouseOver(options[key])} onMouseOut={onMouseOut}
+                    <div id={key} key={key} onMouseOver={() => onMouseOver(options[key])} onMouseOut={onMouseOut} onClick={() => Router.push(options[key].goTo)}
                          style={{position: 'absolute', top: `${options[key].top}px`, left: `${options[key].left}px`, width: `${options[key].width}px`, height: `${options[key].height}px`}}></div>
                 ))}
-
-                <div id="text-container" className={style.textContainer}>
-                    <img src="/images/main-menu-text-container-icon.png" className={style.textContainerIcon}/>
-                    <div id="text-container-title" className={style.textContainerTitle}>{state.title}</div>
-                    <div id="text-container-description"
-                         className={style.textContainerDescription}>{state.description}</div>
-                </div>
+                <MenuTextContainer title={state.title} description={state.description} iconPath="/images/main-menu-text-container-icon.png" />
             </div>
         </>)
 }

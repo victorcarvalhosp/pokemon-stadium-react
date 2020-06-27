@@ -17,7 +17,7 @@ export default function CursorCustom() {
 
     useEffect(() => {
         if (!globalState.state.turnedOn) {
-            setCursor(null);;
+            setCursor(null);
         } else if (globalState.state.actualScreen === GameScreen.MainMenu) {
             setCursor(<CursorMenu />);
         } else {

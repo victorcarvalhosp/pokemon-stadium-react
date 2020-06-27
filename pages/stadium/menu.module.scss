@@ -1,0 +1,44 @@
+.page {
+  background: url(/images/stadium-background.png) no-repeat #68791D;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=), auto;
+
+  h1 {
+    background: linear-gradient(90deg, rgba(72,216,242,1) 0%, rgba(72,216,242,1) 89%, rgba(72,216,242,0.3897934173669467) 100%);
+    text-shadow: -4px 0 black, 0 4px black, 0px 0 black, 0 0px black;
+    font-size: 22px;
+    position: fixed;
+    top: 14px;
+    left: 0px;
+    padding-left: 50px;
+    padding-bottom: 7px;
+    padding-right: 23px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  .menuOption {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+
+  .menuOption h2 {
+    font-size: 14px;
+    padding-top: 4px;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(131, 58, 180, 1) 79%, rgba(131, 58, 180, 0.2861519607843137) 100%);
+  }
+
+  .menuOption p {
+    font-size: 10px;
+    margin-left: 50px;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 0.5018382352941176) 0%, rgba(131, 58, 180, 1) 17%, rgba(131, 58, 180, 1) 100%);
+  }
+
+  .menuOption:hover {
+    color: yellow;
+  }
+
+}
+
+

@@ -9,4 +9,5 @@ export enum GameScreen {
     Intro = 'Intro',
     Title = 'Title',
     MainMenu = 'MainMenu',
+    StadiumMenu = 'StadiumMenu'
 }

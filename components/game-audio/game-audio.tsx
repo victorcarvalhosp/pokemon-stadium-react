@@ -10,12 +10,13 @@ export default function GameAudio() {
     const [, introPlayAudio, introStopAudio] = useAudio("/audio/intro.mp3");
     const [, titlePlayAudio, titleStopAudio] = useAudio("/audio/title-screen.mp3");
     const [, mainMenuPlayAudio, mainMenuStopAudio] = useAudio("/audio/main-menu.mp3");
-
+    const [, stadiumMenuPlayAudio, stadiumMenuStopAudio] = useAudio("/audio/stadium.mp3");
 
     function stopAllSounds() {
         titleStopAudio();
         introStopAudio();
-        mainMenuStopAudio()
+        mainMenuStopAudio();
+        stadiumMenuStopAudio();
     }
 
     useEffect(() => {
@@ -30,12 +31,14 @@ export default function GameAudio() {
         } else if (globalState.state.actualScreen === GameScreen.MainMenu) {
             stopAllSounds();
             mainMenuPlayAudio();
+        } else if (globalState.state.actualScreen === GameScreen.StadiumMenu) {
+            stopAllSounds();
+            stadiumMenuPlayAudio();
         }
         return () => {
             // titleScreenStopAudio();
         }
     }, [globalState.state.turnedOn, globalState.state.actualScreen]);
-    // const [, titleScreenPlayAudio, titleScreenStopAudio] = useAudio("/audio/title-screen.mp3");
 
     return <div> </div>
 }
