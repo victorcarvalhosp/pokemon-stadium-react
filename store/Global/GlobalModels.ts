@@ -2,6 +2,7 @@ export interface GlobalState {
     turnedOn: Readonly<boolean>,
     showContent: Readonly<boolean>,
     actualScreen: Readonly<GameScreen>,
+    activeTournament: Readonly<number>
 }
 
 export enum GameScreen {
@@ -9,5 +10,6 @@ export enum GameScreen {
     Intro = 'Intro',
     Title = 'Title',
     MainMenu = 'MainMenu',
-    StadiumMenu = 'StadiumMenu'
+    StadiumMenu = 'StadiumMenu',
+    SelectTeamTournament = 'SelectTeamTournament',
 }

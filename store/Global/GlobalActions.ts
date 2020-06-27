@@ -6,9 +6,17 @@ export enum GlobalActionType {
     TurnOff = 'TurnOff',
     ShowContent = 'ShowContent',
     SetScreen = 'SetScreen',
+    SetActiveTournament= 'SetActiveTournament'
 }
 
 export type GlobalAction = Action<GlobalActionType, GlobalState>;
+
+export const setActiveTournament = (tournament: number): GlobalAction => {
+    return {
+        type: GlobalActionType.SetActiveTournament,
+        payload: {activeTournament: tournament},
+    }
+};
 
 export const turnOn = (): GlobalAction => {
     return {

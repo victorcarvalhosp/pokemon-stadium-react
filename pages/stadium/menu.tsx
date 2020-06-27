@@ -1,13 +1,14 @@
 import style from "./menu.module.scss";
 import {useGlobal} from "../../store/Global/GlobalContext";
 import {useEffect, useReducer} from "react";
-import {setActualScreen} from "../../store/Global/GlobalActions";
+import {setActiveTournament, setActualScreen} from "../../store/Global/GlobalActions";
 import {GameScreen} from "../../store/Global/GlobalModels";
 import MenuTextContainer from "../../components/menu-text-container/menu-text-container";
-import {defaultDistance, increaseDistance} from "../../components/custom-cursor/cursor-menu/CursorMenuActions";
 import Router from "next/router";
+import {tournaments} from "../../data/tournaments";
+import {Action} from "../../store/Action";
 
-enum ActionType {
+enum MenuActionType {
     SelectNone = 'SelectNone',
     SelectChallengeCup = 'SelectChallengeCup',
     SelectLittleCup = 'SelectLittleCup',
@@ -25,52 +26,44 @@ enum MenuOption {
 }
 
 interface IOptionMenu {
-    actionType: ActionType,
+    actionType: MenuActionType,
     option: MenuOption,
-    title: string,
-    subTitle?: string,
-    description: string,
+    tournamentIndex: number,
     top: number,
     left: number,
     goTo?: string;
 }
 
+//Refactor title and description later to use just the tournamentIndex
 const options: Map<MenuOption, IOptionMenu> = new Map(); // or var map = {};
 options[MenuOption.CHALLENGE_CUP] = {
-    actionType: ActionType.SelectChallengeCup,
+    actionType: MenuActionType.SelectChallengeCup,
     option: MenuOption.CHALLENGE_CUP,
-    title: "CHALLENGE CUP",
-    description: "Battle in this CUP tournament using a preselected team. Can you handle lots od different kinds of POKéMON?",
+    tournamentIndex: 2,
     top: 182,
     left: 10,
     goTo: '/stadium/menu'
 };
 options[MenuOption.LITTLE_CUP] = {
-    actionType: ActionType.SelectLittleCup,
+    actionType: MenuActionType.SelectLittleCup,
     option: MenuOption.LITTLE_CUP,
-    title: "LITTLE CUP",
-    subTitle: "L5 only",
-    description: "A tournament only to L5 POKéMON. Your true abilities may become apparent.",
+    tournamentIndex: 1,
     top: 50,
     left: 380,
     goTo: '/stadium/menu'
 };
 options[MenuOption.POKE_CUP] = {
-    actionType: ActionType.SelectPokeCup,
+    actionType: MenuActionType.SelectPokeCup,
     option: MenuOption.POKE_CUP,
-    title: "POKé CUP",
-    subTitle: "L50 ~ 55",
-    description: "The official POKéMON League Tournament. Hone your skills to become the champ!",
+    tournamentIndex: 3,
     top: 182,
     left: 380,
     goTo: '/stadium/menu'
 };
 options[MenuOption.PRIME_CUP] = {
-    actionType: ActionType.SelectPrimeCup,
+    actionType: MenuActionType.SelectPrimeCup,
     option: MenuOption.PRIME_CUP,
-    title: "PRIME CUP",
-    subTitle: "L1 ~ 100",
-    description: "The ultimate tournament without level restrictions. Let it all hang out!",
+    tournamentIndex: 4,
     top: 280,
     left: 380,
     goTo: '/stadium/menu'
@@ -84,39 +77,31 @@ interface IMenuState {
 
 const initialState: IMenuState = {selected: MenuOption.NONE, title: "", description: ""};
 
+type MenuAction = Action<MenuActionType, IMenuState>;
 
 export default function Menu() {
     const globalState = useGlobal();
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    function reducer(state, action) {
+    const goToSelectPokemonTournamentScreen = (menuOption: MenuOption) => {
+        globalState.dispatch(setActiveTournament(options[menuOption].tournamentIndex))
+        Router.push('/tournament/select-team');
+    }
+
+    function reducer(state: IMenuState, action: MenuAction) {
         switch (action.type) {
-            case ActionType.SelectNone:
+            case MenuActionType.SelectNone:
                 return {selected: MenuOption.NONE, title: "", description: ""};
-            case ActionType.SelectChallengeCup:
+            case MenuActionType.SelectChallengeCup:
+            case MenuActionType.SelectLittleCup:
+            case MenuActionType.SelectPokeCup:
+            case MenuActionType.SelectPrimeCup:
+                const tournamentIndex = options[action.payload.selected].tournamentIndex;
                 return {
-                    selected: MenuOption.CHALLENGE_CUP,
-                    title: options[MenuOption.CHALLENGE_CUP].title,
-                    description: options[MenuOption.CHALLENGE_CUP].description
-                };
-            case ActionType.SelectLittleCup:
-                return {
-                    selected: MenuOption.LITTLE_CUP,
-                    title: options[MenuOption.LITTLE_CUP].title,
-                    description: options[MenuOption.LITTLE_CUP].description
-                };
-            case ActionType.SelectPokeCup:
-                return {
-                    selected: MenuOption.POKE_CUP,
-                    title: options[MenuOption.POKE_CUP].title,
-                    description: options[MenuOption.POKE_CUP].description
-                };
-            case ActionType.SelectPrimeCup:
-                return {
-                    selected: MenuOption.PRIME_CUP,
-                    title: options[MenuOption.PRIME_CUP].title,
-                    description: options[MenuOption.PRIME_CUP].description
+                    selected: action.payload.selected,
+                    title: tournaments[tournamentIndex].title,
+                    description: tournaments[tournamentIndex].description
                 };
             default:
                 throw new Error();
@@ -126,11 +111,14 @@ export default function Menu() {
     // const cursor = useRef(null);
     const onMouseOver = (option: IOptionMenu) => {
         console.log('mouse over', option);
-        dispatch({type: option.actionType});
+        dispatch({
+            type: option.actionType,
+            payload: {selected: option.option},
+        });
     }
 
     const onMouseOut = () => {
-        dispatch({type: ActionType.SelectNone});
+        dispatch({type: MenuActionType.SelectNone});
     }
 
     useEffect(() => {
@@ -144,15 +132,22 @@ export default function Menu() {
                     STADIUM
                 </h1>
                 {Object.keys(options).map(key => (
-                    <div className={style.menuOption} id={key} key={key} onMouseOver={() => onMouseOver(options[key])} onMouseOut={onMouseOut} onClick={() => Router.push(options[key].goTo)}
-                         style={{position: 'absolute', top: `${options[key].top}px`, left: `${options[key].left}px`, width: `250px`}}>
-                        <h2>{options[key].title}</h2>
-                        {options[key].subTitle && (
-                            <p>{options[key].subTitle}</p>
+                    <div className={style.menuOption} id={key} key={key} onMouseOver={() => onMouseOver(options[key])}
+                         onMouseOut={onMouseOut}
+                         onClick={() => goToSelectPokemonTournamentScreen(options[key].option)}
+                         style={{
+                             position: 'absolute',
+                             top: `${options[key].top}px`,
+                             left: `${options[key].left}px`,
+                             width: `250px`
+                         }}>
+                        <h2>{tournaments[options[key].tournamentIndex].title}</h2>
+                        {tournaments[options[key].tournamentIndex].subTitle && (
+                            <p>{tournaments[options[key].tournamentIndex].subTitle}</p>
                         )}
                     </div>
                 ))}
-                <MenuTextContainer title={state.title} description={state.description} iconPath="" />
+                <MenuTextContainer title={state.title} description={state.description} iconPath=""/>
             </div>
         </>)
 }
