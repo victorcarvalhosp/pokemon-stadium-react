@@ -7,6 +7,7 @@ import MenuTextContainer from "../../components/menu-text-container/menu-text-co
 import Router from "next/router";
 import {tournaments} from "../../data/tournaments";
 import {Action} from "../../store/Action";
+import TextBlueBackground from "../../components/text-blue-background/text-blue-background";
 
 enum MenuActionType {
     SelectNone = 'SelectNone',
@@ -128,9 +129,11 @@ export default function Menu() {
     return (
         <>
             <div className={style.page}>
-                <h1>
-                    STADIUM
-                </h1>
+                <TextBlueBackground text="STADIUM" fadeSide="right" style={{
+                    position: 'fixed',
+                    top: '14px',
+                    left: '0px'
+                }}/>
                 {Object.keys(options).map(key => (
                     <div className={style.menuOption} id={key} key={key} onMouseOver={() => onMouseOver(options[key])}
                          onMouseOut={onMouseOut}
@@ -147,7 +150,9 @@ export default function Menu() {
                         )}
                     </div>
                 ))}
-                <MenuTextContainer title={state.title} description={state.description} iconPath=""/>
+                {state.title && (
+                    <MenuTextContainer title={state.title} description={state.description} iconPath=""/>
+                )}
             </div>
         </>)
 }

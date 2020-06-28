@@ -1,0 +1,21 @@
+.title {
+  text-shadow: -4px 0 black, 0 4px black, 0px 0 black, 0 0px black;
+  font-size: 18px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding-bottom: 7px;
+
+  &.left {
+    padding-left: 13px;
+    padding-right: 33px;
+    background: linear-gradient(90deg, rgba(72, 216, 242, 0.3841911764705882) 0%, rgba(72, 216, 242, 1) 13%, rgba(72, 216, 242, 1) 100%);
+  }
+
+  &.right {
+    padding-left: 33px;
+    padding-right: 13px;
+    background: linear-gradient(90deg, rgba(72, 216, 242, 1) 0%, rgba(72, 216, 242, 1) 89%, rgba(72, 216, 242, 0.3897934173669467) 100%);
+  }
+}
+
+

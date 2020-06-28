@@ -1,5 +1,5 @@
-import {IEvolution} from "./Evolution";
 import {Types} from "./conditional-types-definitions";
+import {IEvolution} from "./Evolution";
 
 export interface IPokemonVariety {
   id: number;

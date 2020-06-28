@@ -38,7 +38,11 @@ export const tournaments: Record<number, ITournament> =
             subTitle: "",
             description: "",
             levels: [],
-            pokemonAvailable: [{variety: 1, level: 5}, {variety: 4, level: 5}, {variety: 7, level: 5}, {variety: 10, level: 5}, {variety: 13, level: 5}, {variety: 14, level: 5}],
+            pokemonAvailable: [{variety: 1, level: 5}, {variety: 4, level: 5}, {variety: 7, level: 5}, {variety: 10, level: 5}, {variety: 13, level: 5}, {variety: 14, level: 5},
+                {variety: 15, level: 5}, {variety: 16, level: 5}, {variety: 17, level: 5}, {variety: 18, level: 5}, {variety: 19, level: 5}, {variety: 20, level: 5},
+                {variety: 21, level: 5}, {variety: 22, level: 5}, {variety: 23, level: 5}, {variety: 24, level: 5}, {variety: 25, level: 5}, {variety: 28, level: 5},
+                {variety: 29, level: 5}, {variety: 30, level: 5}, {variety: 31, level: 5}, {variety: 32, level: 5}, {variety: 33, level: 5}, {variety: 34, level: 5}],
+
             maxLevel: 5,
         },
         1: {
@@ -47,7 +51,10 @@ export const tournaments: Record<number, ITournament> =
             subTitle: "L5 only",
             description: "A tournament only to L5 POKéMON. Your true abilities may become apparent.",
             levels: [tournamentLevels[1]],
-            pokemonAvailable: [{variety: 1, level: 5}, {variety: 4, level: 5}, {variety: 7, level: 5}, {variety: 10, level: 5}, {variety: 13, level: 5}, {variety: 14, level: 5}],
+            pokemonAvailable: [{variety: 1, level: 5}, {variety: 4, level: 5}, {variety: 7, level: 5}, {variety: 10, level: 5}, {variety: 13, level: 5}, {variety: 14, level: 5},
+                {variety: 15, level: 5}, {variety: 16, level: 5}, {variety: 17, level: 5}, {variety: 18, level: 5}, {variety: 19, level: 5}, {variety: 20, level: 5},
+                {variety: 21, level: 5}, {variety: 22, level: 5}, {variety: 23, level: 5}, {variety: 24, level: 5}, {variety: 25, level: 5}, {variety: 28, level: 5},
+                {variety: 29, level: 5}, {variety: 30, level: 5}, {variety: 31, level: 5}, {variety: 32, level: 5}, {variety: 33, level: 5}, {variety: 34, level: 5}],
             maxLevel: 5,
         },
         2: {

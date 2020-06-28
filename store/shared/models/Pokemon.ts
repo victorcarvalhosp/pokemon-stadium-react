@@ -4,7 +4,6 @@ export interface IPokemon {
   name: string;
   variety: number;
   level: number;
-  task: string;
   date?: Date;
   actualHp: number;
   hp: number;
@@ -25,7 +24,6 @@ export class Pokemon implements IPokemon{
   name: string;
   variety: number;
   level: number;
-  task: string;
   date?: Date;
   actualHp: number;
   hp: number;
@@ -45,7 +43,6 @@ export class Pokemon implements IPokemon{
     this.name = '';
     this.variety = 0;
     this.level = 0;
-    this.task = '';
     this.actualHp = 0;
     this.hp = 0;
     this.atk = 0;
