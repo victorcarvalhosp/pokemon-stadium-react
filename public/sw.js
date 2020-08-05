@@ -81,7 +81,7 @@ if (!self.define) {
     });
   };
 }
-define("./sw.js",['./workbox-b90066a8'], function (workbox) { 'use strict';
+define("./sw.js",['./workbox-205f2436'], function (workbox) { 'use strict';
 
   /**
   * Welcome to your Workbox-powered service worker!
@@ -98,40 +98,70 @@ define("./sw.js",['./workbox-b90066a8'], function (workbox) { 'use strict';
   importScripts();
   workbox.skipWaiting();
   workbox.clientsClaim();
-  /**
-   * The precacheAndRoute() method efficiently caches and responds to
-   * requests for URLs in the manifest.
-   * See https://goo.gl/S9QRab
-   */
-
-  workbox.precacheAndRoute([{
-    "url": "/_next/static/runtime/amp.js",
-    "revision": "68599c7975699254d1a0d3782dcb7e1e"
-  }, {
-    "url": "/_next/static/runtime/amp.js.map",
-    "revision": "7098cccd7c3951a19cb15bc6d3deffc1"
-  }, {
-    "url": "/_next/static/runtime/main.js",
-    "revision": "7b405bebbde476307ed973d0c28ef323"
-  }, {
-    "url": "/_next/static/runtime/main.js.map",
-    "revision": "8847e3b62a8e351f7b06cc728dedcbf7"
-  }, {
-    "url": "/_next/static/runtime/polyfills.js",
-    "revision": "cf6f4b12f4634f8f79378d41f3a855a4"
-  }, {
-    "url": "/_next/static/runtime/polyfills.js.map",
-    "revision": "82dca635a629d8ab38c3ad85b2ad65a2"
-  }, {
-    "url": "/_next/static/runtime/webpack.js",
-    "revision": "c42d04068c5e5306592137bc048a6851"
-  }, {
-    "url": "/_next/static/runtime/webpack.js.map",
-    "revision": "e273b5db048a73716b8c761c459f2b05"
-  }], {
-    "ignoreURLParametersMatching": [/ts/]
-  });
-  workbox.cleanupOutdatedCaches();
+  workbox.registerRoute(/^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i, new workbox.CacheFirst({
+    "cacheName": "google-fonts",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 4,
+      maxAgeSeconds: 31536000,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/^https:\/\/use\.fontawesome\.com\/releases\/.*/i, new workbox.CacheFirst({
+    "cacheName": "font-awesome",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 1,
+      maxAgeSeconds: 31536000,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-font-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 4,
+      maxAgeSeconds: 604800,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-image-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 64,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:js)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-js-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 16,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:css|less)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-style-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 16,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/\.(?:json|xml|csv)$/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "static-data-assets",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 16,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
+  workbox.registerRoute(/.*/i, new workbox.StaleWhileRevalidate({
+    "cacheName": "others",
+    plugins: [new workbox.ExpirationPlugin({
+      maxEntries: 16,
+      maxAgeSeconds: 86400,
+      purgeOnQuotaError: true
+    })]
+  }), 'GET');
 
 });
 //# sourceMappingURL=sw.js.map
