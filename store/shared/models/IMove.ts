@@ -1,8 +1,4 @@
-import {ITask} from "./Task";
-import firebase from "firebase";
-import {symlink} from "fs";
-import {Types} from "./conditional-types-definitions";
-
+import { Types } from "./conditional-types-definitions";
 
 export interface IMove {
   id: number;
@@ -10,17 +6,17 @@ export interface IMove {
   exhibitionName: string;
   description: string;
   accuracy: number;
-  type: Types ;
+  type: Types;
   power: number;
 }
 
-export class Move implements IMove{
+export class Move implements IMove {
   id: number;
   name: string;
   description: string;
   exhibitionName: string;
   accuracy: number;
-  type: Types ;
+  type: Types;
   power: number;
 
   constructor() {
@@ -29,8 +25,7 @@ export class Move implements IMove{
     this.description = "";
     this.exhibitionName = "";
     this.accuracy = 100;
-    this.type = "normal"
+    this.type = "normal";
     this.power = 40;
   }
-
 }
