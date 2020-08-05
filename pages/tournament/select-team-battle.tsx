@@ -1,4 +1,4 @@
-import styles from "./select-team.module.scss";
+import styles from "./select-team-battle.module.scss";
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../store/Global/GlobalContext";
 import { GameScreen } from "../../store/Global/GlobalModels";
@@ -16,52 +16,42 @@ import GameModal from "../../components/game-modal/game-modal";
 import { useRouter } from "next/router";
 import { AppRoutes } from "../../utils/app-routes";
 
-export default function SelectTeam() {
+export default function SelectTeamBattle() {
   const globalState = useGlobal();
   const [activePos, setActivePos] = useState<number>(0);
   const router = useRouter();
 
-  const [pokemonsAvailable, setPokemonsAvailable] = useState<IPokemon[]>([]);
-  const [team, setTeam] = useState<TournamentTeam>(new TournamentTeam());
+  const [p1SelectedPokemonsBattle, setP1SelectedPokemonsBattle] = useState<
+    IPokemon[]
+  >([]);
+  const [p2SelectedPokemonsBattle, setP2SelectedPokemonsBattle] = useState<
+    IPokemon[]
+  >([]);
+
   const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(
     false
   );
 
   useEffect(() => {
-    globalState.dispatch(setActualScreen(GameScreen.SelectTeamTournament));
-    const pkmns = [];
-    for (const pkmnGenerate of tournaments[globalState.state.activeTournament]
-      .pokemonAvailable) {
-      pkmns.push(
-        PokemonHelper.generatePokemonWithRandomAttributes(
-          pkmnGenerate.variety,
-          pkmnGenerate
-        )
-      );
+    if (!globalState.state.activeTournamentTeam.isTeamComplete()) {
+      router.push(AppRoutes.SELECT_TEAM);
     }
-    setPokemonsAvailable(pkmns);
+    globalState.dispatch(setActualScreen(GameScreen.SelectTeamBattle));
   }, []);
 
-  useEffect(() => {
-    console.log(team);
-    if (team.isTeamComplete()) {
-      setShowConfirmationModal(true);
-    }
-  }, [team.isTeamComplete()]);
-
   const selectPokemon = (pokemon: IPokemon) => {
-    if (!alreadySelected(pokemon)) {
-      team.setByPosition(activePos, pokemon);
-      setTeam(team);
-      if (activePos <= 5) {
-        setActivePos(activePos + 1);
-      }
-    }
+    // if (!alreadySelected(pokemon)) {
+    //   team.setByPosition(activePos, pokemon);
+    //   setTeam(team);
+    //   if (activePos <= 5) {
+    //     setActivePos(activePos + 1);
+    //   }
+    // }
   };
 
   const alreadySelected = (pkmn: IPokemon) => {
     return (
-      team.asList().filter((p) => {
+      p1SelectedPokemonsBattle.filter((p) => {
         return p.id === pkmn.id;
       }).length > 0
     );
@@ -76,9 +66,9 @@ export default function SelectTeam() {
   };
 
   const handleCancel = () => {
-    team.setByPosition(5, new Pokemon());
-    setTeam(team);
-    setActivePos(5);
+    // team.setByPosition(5, new Pokemon());
+    // setTeam(team);
+    setActivePos(2);
     setShowConfirmationModal(false);
   };
 
@@ -122,7 +112,7 @@ export default function SelectTeam() {
           }}
         />
         <div className={`${styles.selectedPokemonsArea} flex-row`}>
-          {team.asList().map((pkmn, i) => (
+          {p1SelectedPokemonsBattle.map((pkmn, i) => (
             <PokemonBasicInfoTournamentTeamSelection
               pokemon={pkmn}
               selected={activePos === i}
@@ -131,16 +121,6 @@ export default function SelectTeam() {
           ))}
         </div>
 
-        <div className={`${styles.selectPokemonsArea} flex-row`}>
-          {pokemonsAvailable.map((pkmn) => (
-            <PokemonBasicInfo
-              pokemon={pkmn}
-              backgroundColor="#1E1E9B"
-              onClick={() => selectPokemon(pkmn)}
-              selected={alreadySelected(pkmn)}
-            />
-          ))}
-        </div>
         {showConfirmationModal && (
           <GameModal show={showConfirmationModal} onClose={closeModal}>
             <div className={styles.confirmation}>
@@ -158,6 +138,7 @@ export default function SelectTeam() {
           </GameModal>
         )}
       </div>
+      ;
     </>
   );
 }

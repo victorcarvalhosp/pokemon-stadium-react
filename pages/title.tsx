@@ -13,7 +13,6 @@ export default function Title() {
   const router = useRouter();
 
   const handlePressStart = () => {
-    console.log("CLICKED");
     router.push(AppRoutes.MAIN_MENU);
   };
 

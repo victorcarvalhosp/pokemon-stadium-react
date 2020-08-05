@@ -1,0 +1,43 @@
+.page {
+  background: url(/images/select-team-background-1.png) no-repeat #68791d;
+  background-blend-mode: screen;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+
+  .selectedPokemonsArea {
+    position: fixed;
+    left: 0;
+    top: 110px;
+    height: 100px;
+    overflow: auto;
+    background: grey;
+    width: 94%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 0 20px;
+    border-radius: 4px;
+  }
+
+  .selectPokemonsArea {
+    position: fixed;
+    left: 0;
+    top: 258px;
+    height: 200px;
+    overflow: auto;
+    background: #3232ff;
+    width: 94%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 0 20px;
+    border-radius: 4px;
+  }
+
+  .confirmation {
+    font-size: 18px;
+    button {
+      padding: 20px;
+      align-content: center;
+    }
+  }
+}

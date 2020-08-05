@@ -1,0 +1,51 @@
+.trainers {
+  width: 512px;
+  z-index: 4;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation: openClose 3s ease forwards;
+  transform: translate(-50%, -50%);
+
+  img {
+    zoom: 2;
+  }
+
+  .metalBar {
+    padding: 12px 0;
+    font-size: 14px;
+    background-color: #2f4353;
+    background-image: linear-gradient(315deg, #2f4353 0%, #b7b1b0 96%);
+    border: 4px outset #b7b1b0;
+  }
+
+  .unknownTrainer {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+    display: inline;
+    div {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      font-size: 12px;
+      text-shadow: -2px 0 black, 0 2px black, 0px 0 black, 0 0px black;
+    }
+  }
+
+  @keyframes openClose {
+    0% {
+      left: 100%;
+    }
+    30% {
+      left: 50%;
+    }
+    95% {
+      left: 50%;
+    }
+    100% {
+      left: 999px;
+    }
+  }
+}
