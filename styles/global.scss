@@ -1,11 +1,19 @@
 * {
-  font-family: 'Press Start 2P', cursive;
-}
-body {
-  font-family: 'Open Sans';
+  font-family: "Press Start 2P", cursive;
 }
 
-html, body {
+*,
+*::before,
+*::after {
+  //Using border-box was breaking some layouts - so let's keep this one for now.
+  box-sizing: content-box !important;
+}
+body {
+  font-family: "Open Sans";
+}
+
+html,
+body {
   height: 100%;
 }
 
@@ -50,7 +58,7 @@ html, body {
 }
 
 @media only screen and (max-width: 640px) {
-  body{
+  body {
     zoom: 0.5;
   }
   .flex-item {
@@ -61,7 +69,7 @@ html, body {
   }
 }
 
-.cursor{
+.cursor {
   position: absolute;
   width: 20px;
   height: 20px;

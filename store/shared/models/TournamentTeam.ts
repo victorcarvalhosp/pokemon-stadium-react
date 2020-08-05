@@ -1,5 +1,5 @@
-import {IPokemon, Pokemon} from "./Pokemon";
-import {makeid} from "../../../utils/utils";
+import { IPokemon, Pokemon } from "./Pokemon";
+import { makeid } from "../../../utils/utils";
 
 export interface ITournamentTeam {
   id: string;
@@ -11,7 +11,7 @@ export interface ITournamentTeam {
   pkmn6: IPokemon;
 }
 
-export class TournamentTeam implements ITournamentTeam{
+export class TournamentTeam implements ITournamentTeam {
   id: string;
   pkmn1: IPokemon;
   pkmn2: IPokemon;
@@ -30,17 +30,24 @@ export class TournamentTeam implements ITournamentTeam{
     this.pkmn6 = new Pokemon();
   }
 
-  teamComplete(){
-    return this.pkmn1.id && this.pkmn2.id && this.pkmn3.id && this.pkmn4.id && this.pkmn5.id && this.pkmn6.id;
-  }
+  isTeamComplete = () => {
+    return (
+      this.pkmn1.id &&
+      this.pkmn2.id &&
+      this.pkmn3.id &&
+      this.pkmn4.id &&
+      this.pkmn5.id &&
+      this.pkmn6.id
+    );
+  };
 
-  setByPosition(position: number, pokemon: IPokemon){
+  setByPosition(position: number, pokemon: IPokemon) {
     console.log(position + "inside object");
     switch (position) {
       case 0: {
         this.pkmn1 = pokemon;
         break;
-      };
+      }
       case 1: {
         this.pkmn2 = pokemon;
         break;
@@ -64,12 +71,18 @@ export class TournamentTeam implements ITournamentTeam{
     }
   }
 
-  getByPosition(position: 0|1|2|3|4|5){
+  getByPosition(position: 0 | 1 | 2 | 3 | 4 | 5) {
     return this.asList()[position];
   }
 
-  asList(){
-    return [this.pkmn1, this.pkmn2, this.pkmn3, this.pkmn4, this.pkmn5, this.pkmn6]
+  asList() {
+    return [
+      this.pkmn1,
+      this.pkmn2,
+      this.pkmn3,
+      this.pkmn4,
+      this.pkmn5,
+      this.pkmn6,
+    ];
   }
-
 }
